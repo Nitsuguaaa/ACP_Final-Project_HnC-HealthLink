@@ -1,5 +1,4 @@
 import tkinter as tk
-import Backend.test as be
 
 def homescr():
     r = tk.Tk()
@@ -11,9 +10,7 @@ def homescr():
 
     #modules
     btn1 = tk.Button(r, text='Stop', width=25, command=r.destroy)
-    btn1.place(relx=1, x=-2, y=2, anchor="ne")
+    btn1.place(x=100, y=100, anchor="nw")
 
-    btn2 = tk.Button(r, text='test', width=25, command=be.test)
-    btn2.place(relx=0.5, rely=0.5, anchor="center")
 
     r.mainloop()
