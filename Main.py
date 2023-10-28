@@ -1,18 +1,5 @@
-import mysql.connector
+from Frontend import scrdir
 
-try:
-    mydb = mysql.connector.connect(host="localhost", user="root", password="", database="testDB")
-except:
-    print('Failed to connect')
-    exit()
+frontEnd = scrdir.ScrPages()
 
-mycursor = mydb.cursor()
-
-mycursor.execute("SELECT * FROM testTBL")
-
-myresult = mycursor.fetchall()
-
-for x in myresult:
-  print(x)
-
-mydb.close()
+frontEnd.homescr()
