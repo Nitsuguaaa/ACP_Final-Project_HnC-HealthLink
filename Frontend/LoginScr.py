@@ -44,7 +44,7 @@ def loginscr():
 
     Button(loginCredF, image=roundedButtonAsset, border=0, bg='white').grid(row=4, column=0, padx=(330, 0), pady=5)
 
-    loginCredF.grid(row=1, column=0, pady=(100,30))
+    loginCredF.grid(row=1, column=0, pady=(100, 30))
 
     '''
             LOGIN LABEL FRAME
