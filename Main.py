@@ -1,12 +1,31 @@
 from Frontend import scrdir
+
+frontEnd = scrdir.ScrPages()
+
+frontEnd.loginscr()
+
+'''
 from MySQL03 import sqldir
 from Backend import backenddir
 
-frontEnd = scrdir.ScrPages()
 MySQL = sqldir.SqlCommands()
 backEnd = backenddir.backendCommands()
 
-frontEnd.loginscr()
-# print(MySQL.select("hsptlpassworddb", "userstbl"))
-# backEnd.passwordCheck("Augustin", "pass123")
+    GUI Directory
+
+frontEnd.loginscr()  # Opens login screen
+frontEnd.homescr()  # Opens Home Screen
+
+
+    SQL Directory
+
+# Inserts user Maria into the users tbl table
+MySQL.insert("hsptlpassworddb", "userstbl", "name, age, address", ("Maria", 19, "Balagtas, Batangas City"))
+# shows the userstbl table (Other parameters that have defaults: column="*", constraints=None e.g."WHERE Username='Mark'")
+MySQL.select("hsptlpassworddb", "userstbl")
+
+    Backend Directory
+# Input of application user, first parameter is Username and second is the password
+backEnd.passwordCheck("Augustin", "pass123")
+'''
 
