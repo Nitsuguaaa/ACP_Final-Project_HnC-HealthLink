@@ -3,25 +3,32 @@ from tkinter import *
 def loginscr():
     scr = Tk()
     # gui
-    scr.title('Hospital Aid System')
+    scr.title('H&C HealthLink')
     scr.minsize(1280, 720)
     scr.maxsize(1280, 720)
 
-    imgpath = PhotoImage(file=r"rsc\frameBG\login-bg.png")
-    Label(scr, image=imgpath).place(relheight=1, relwidth=1)
+    # Graphics
+    windowBackground = PhotoImage(file=r"rsc\frameBG\login-bg.png")
+    windowLogo = PhotoImage(file=r"rsc\AppLogo\app-logo.png")
+    roundedEntryAsset = PhotoImage(file=r'rsc\Assets\username-entry.png')
+    roundedButtonAsset = PhotoImage(file=r'rsc\Assets\login-btn.png')
 
-    Label(scr, text='Hospital Aid System', bg='#9FE2BF', font='Roboto 28 bold').place(x=40, y=75)
+    Label(scr, image=windowBackground).place(relheight=1, relwidth=1)
+    scr.iconphoto(False, windowLogo)
+
     mainFrame = LabelFrame(scr, width=1280, height=720, bg='white', border=0)
-    mainFrame.pack(padx=40, pady=200, anchor=W)
+    mainFrame.pack(padx=40, anchor=W)
 
+    titleF = Frame(mainFrame, bg='#9FE2BF')
+    Label(titleF, text='H&C HealthLink', bg='#9FE2BF', font='Roboto 54 bold', fg='#F0347B').pack(anchor=W, pady=(25, 0))
+    Label(titleF, text='Integrating Services For A Better Community', bg='#9FE2BF', font='Roboto 12', fg='#F0347B').pack(anchor=W, pady=(0, 5))
 
+    titleF.grid(row=0, column=0)
 
     '''
         LOGIN CREDENTIALS FRAME
     '''
     loginCredF = Frame(mainFrame, bg='white')
-    roundedEntryAsset = PhotoImage(file=r'rsc\Assets\username-entry.png')
-    roundedButtonAsset = PhotoImage(file=r'rsc\Assets\login-btn.png')
 
     # USERNAME
     Label(loginCredF, text="Username", font="Roboto 11", bg='white').grid(row=0, column=0, sticky=W, pady=2)
@@ -37,8 +44,7 @@ def loginscr():
 
     Button(loginCredF, image=roundedButtonAsset, border=0, bg='white').grid(row=4, column=0, padx=(330, 0), pady=5)
 
-
-    loginCredF.grid(row=0, column=0, pady=30)
+    loginCredF.grid(row=1, column=0, pady=(100,30))
 
     '''
             LOGIN LABEL FRAME
@@ -47,7 +53,7 @@ def loginscr():
     Label(loginLabelF, text="Login  | ", font=("Arial", 11), bg='white').grid(row=0, column=0)
     Button(loginLabelF, text="Forgot Password", font=("Arial", 11), bg='white', border=0, fg='blue').grid(row=0, column=1)
 
-    loginLabelF.grid(row=1, column=0, padx=50, pady=('0', '100'))
+    loginLabelF.grid(row=2, column=0, padx=50, pady=(0, 100))
 
 
 
