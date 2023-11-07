@@ -5,6 +5,7 @@ frontEnd = scrdir.ScrPages()
 frontEnd.loginscr()
 
 '''
+Hello
 from MySQL03 import sqldir
 from Backend import backenddir
 
