@@ -1,2 +1,2 @@
 # H&C HealthLink System
-A hostital aid system
+A hostital aid system for the community
