@@ -1,7 +1,7 @@
-from tkinter import *
+import tkinter as tk
 
 def dashboard():
 
-    dboard = Tk()
+    dboard = tk.Tk()
 
 
