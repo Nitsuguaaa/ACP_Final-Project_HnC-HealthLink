@@ -30,5 +30,8 @@ def passwordCheck(username, password):
         # IF STATEMENT
         if userpass == dbpass:
             print('Login: ', True)
+            return True
         else:
             print('Login: ', False)
+            return False
+
