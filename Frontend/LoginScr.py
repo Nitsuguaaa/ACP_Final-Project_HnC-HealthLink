@@ -40,9 +40,7 @@ def loginscr():
         print("The name is : " + name)
         print("The password is : " + password)
 
-        result = bool(backendCmd.passwordCheck(name, password))
-        print(type(result))
-        if result is True:
+        if bool(backendCmd.passwordCheck(name, password)):
             print("Login Success")
             scr.destroy()
             frontendCmd.homescr()
