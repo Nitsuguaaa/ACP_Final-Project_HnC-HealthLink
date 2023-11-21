@@ -1,16 +1,15 @@
-import tkinter as tk
+from tkinter import *
 
 def homescr():
-    r = tk.Tk()
+    scr = Tk()
+    # gui
+    scr.title('H&C HealthLink')
+    scr.minsize(1280, 720)
+    scr.maxsize(1280, 720)
+    # Graphics
+    windowBackground = PhotoImage(file=r"rsc\frameBG\login-bg.png")
+    windowLogo = PhotoImage(file=r"rsc\AppLogo\app-logo.png")
+    scr.iconphoto(False, windowLogo)
 
-    #gui
-    r.geometry("400x400")
-    r.minsize(400, 400)
-    r.title('Home Screen')
 
-    #modules
-    btn1 = tk.Button(r, text='Stop', width=25, command=r.destroy)
-    btn1.place(x=100, y=100, anchor="nw")
-
-
-    r.mainloop()
+    scr.mainloop()

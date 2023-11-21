@@ -4,6 +4,17 @@ frontEnd = scrdir.ScrPages()
 
 frontEnd.loginscr()
 
+
+
+
+
+
+
+
+
+
+
+
 '''
 Hello World
 from MySQL03 import sqldir
@@ -29,4 +40,5 @@ MySQL.select("hsptlpassworddb", "userstbl")
 # Input of application user, first parameter is Username and second is the password
 backEnd.passwordCheck("Augustin", "pass123")
 '''
+
 
