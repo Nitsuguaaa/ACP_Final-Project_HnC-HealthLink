@@ -1,4 +1,4 @@
-from Frontend import LoginScr, HomeScr, PatientForm
+from Frontend import LoginScr, HomeScr, PatientFormadd
 
 class ScrPages:
     def loginscr(self):
