@@ -3,7 +3,7 @@ import bcrypt
 def passwordCheck(username, password):
     mySql = sqldir.SqlCommands()
 
-    myresult = mySql.select("HealthLink", "UserLogin", constraints=f"WHERE Username='{username}'")
+    myresult = mySql.select("hsptlpassworddb", "userlogintbl", constraints=f"WHERE Username='{username}'")
 
     mylist = []
     for x in myresult:

@@ -1,13 +1,11 @@
 from pathlib import Path
 from tkinter import *
 
-OUTPUT_PATH = Path(__file__).parent
-ASSETS_PATH = OUTPUT_PATH / Path(r"C:\Users\63936\Desktop\MATTHEW_CODE_DSA\final project (oop x dbms x adv prog)\build2 [patientform(delete)]\assets\frame0")
+ASSETS_PATH = Path(r"rsc\FormAssets(Delete)")
 
 
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
-
 
 window = Tk()
 window.title("H&C HealthLink")
