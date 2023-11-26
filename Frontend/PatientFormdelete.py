@@ -2,8 +2,6 @@ from pathlib import Path
 from tkinter import *
 
 ASSETS_PATH = Path(r"rsc\FormAssets(Delete)")
-
-
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
@@ -11,7 +9,6 @@ window = Tk()
 window.title("H&C HealthLink")
 window.geometry("530x700")
 window.configure(bg = "#FFFFFF")
-
 
 canvas = Canvas(
     window,

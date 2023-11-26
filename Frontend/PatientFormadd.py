@@ -11,7 +11,6 @@ def PatientFormAdd():
     window.geometry("530x700")
     window.configure(bg = "#FFFFFF")
 
-
     canvas = Canvas(
         window,
         bg = "#FFFFFF",

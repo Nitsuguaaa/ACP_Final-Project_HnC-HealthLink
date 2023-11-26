@@ -9,4 +9,3 @@ class ScrPages:
         PatientFormadd.PatientFormAdd()
     def emailscr(self):
         Emailform.EmailForm()
-

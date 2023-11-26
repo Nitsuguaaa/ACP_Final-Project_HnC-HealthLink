@@ -13,34 +13,34 @@ def EmailForm():
     window.configure(bg = "#FFFFFF")
 
     canvas = Canvas(
-        window,
-        bg = "#FFFFFF",
-        height = 545,
-        width = 700,
-        bd = 0,
-        highlightthickness = 0,
-        relief = "ridge"
+    window,
+    bg = "#FFFFFF",
+    height = 545,
+    width = 700,
+    bd = 0,
+    highlightthickness = 0,
+    relief = "ridge"
     )
 
     canvas.place(x = 0, y = 0)
     canvas.create_rectangle(
-        95.0,
+        25.0,
         137.0,
-        599.0,
+        529.0,
         221.0,
         fill="#D9D9D9",
         outline="")
 
     canvas.create_rectangle(
-        108.0,
+        38.0,
         167.0,
-        583.0,
+        513.0,
         197.0,
         fill="#FFFFFF",
         outline="")
 
     canvas.create_text(
-        108.0,
+        38.0,
         147.0,
         anchor="nw",
         text="Email",
@@ -83,8 +83,8 @@ def EmailForm():
         relief="flat"
     )
     button_1.place(
-        x=246.0,
-        y=479.0,
+        x=250.0,
+        y=456.0,
         width=220.0,
         height=40.0
     )
@@ -99,10 +99,10 @@ def EmailForm():
         relief="flat"
     )
     button_2.place(
-        x=75.0,
-        y=244.0,
-        width=260.0,
-        height=212.0
+        x=544.0,
+        y=136.0,
+        width=127.48846435546875,
+        height=85.94444274902344
     )
 
     button_image_3 = PhotoImage(
@@ -115,10 +115,10 @@ def EmailForm():
         relief="flat"
     )
     button_3.place(
-        x=371.0,
-        y=244.0,
-        width=260.0,
-        height=212.0
+        x=554.0,
+        y=252.0,
+        width=119.1950912475586,
+        height=134.84613037109375
     )
 
     button_image_4 = PhotoImage(
@@ -131,10 +131,10 @@ def EmailForm():
         relief="flat"
     )
     button_4.place(
-        x=567.0,
-        y=35.0,
-        width=95.0,
-        height=33.0
+        x=25.0,
+        y=244.0,
+        width=504.0,
+        height=150.0
     )
     window.resizable(False, False)
     window.mainloop()
