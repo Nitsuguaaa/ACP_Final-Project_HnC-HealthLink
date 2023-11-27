@@ -43,8 +43,8 @@ def loginscr():
         if bool(backendCmd.passwordCheck(name, password)):
             print("Login Success")
             scr.destroy()
-            frontendCmd.emailscr()
-
+            frontendCmd.patientaddscr()
+            
         name_var.set("")
         passw_var.set("")
 

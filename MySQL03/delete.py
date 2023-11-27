@@ -1,11 +1,10 @@
-import mysql.connector
-def deletesql(database, table, element, value):
-    try:
-        mydb = mysql.connector.connect(host="localhost", user="root", password="", database=database)
-    except:
-        print('Failed to connect')
-        exit()
+from MySQL03 import sqldir
+def deletesql(table, element, value):
+    sqlCom = sqldir.SqlCommands()
+    mydb = sqlCom.initDB('healthlinkdb')
 
     mycursor = mydb.cursor()
     mycursor.execute(f"DELETE FROM {table} WHERE {element} = '{value}'")
     mydb.commit()
+
+    mydb.close()

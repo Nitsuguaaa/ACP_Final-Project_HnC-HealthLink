@@ -1,9 +1,26 @@
 from Frontend import scrdir
 from Backend import backenddir
+from MySQL03 import sqldir
+from Frontend import PatientFormdelete
 
 frontEnd = scrdir.ScrPages()
+sqlcom = sqldir.SqlCommands()
 
-frontEnd.loginscr()
+# PatientFormdelete.PatientDeleteScr()
+
+#frontEnd.loginscr()
+# sqlcom.insert("patienttbl", ("patientID", "patientName", "patientAddress"), ("PT-0002", "Mark Michael", "Cebu City"))
+UserSearched = input("Search patient: ")
+
+
+# WAG TATAGTAGIN, MAGTAGTAG PANGET
+if UserSearched[0:2] == "PT-":
+    print(sqlcom.select("patienttbl", constraints=f"WHERE patientName LIKE '%{UserSearched}%'"))
+else:
+    print(sqlcom.select("patienttbl", constraints=f"WHERE patientID LIKE '%{UserSearched}%'"))
+
+
+
 
 
 
