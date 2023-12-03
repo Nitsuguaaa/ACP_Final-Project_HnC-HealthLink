@@ -1,24 +1,24 @@
 from pathlib import Path
 from tkinter import *
 
-ASSETS_PATH = Path(r"rsc\FormAssets(Delete)")
+ASSETS_PATH = Path(r"rsc\FormAssets(Update)")
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
-def PatientDeleteScr():
+def PatientUpdateScr():
     window = Tk()
     window.title("H&C HealthLink")
     window.geometry("530x700")
     window.configure(bg = "#FFFFFF")
 
     canvas = Canvas(
-        window,
-        bg = "#FFFFFF",
-        height = 700,
-        width = 530,
-        bd = 0,
-        highlightthickness = 0,
-        relief = "ridge"
+    window,
+    bg = "#FFFFFF",
+    height = 700,
+    width = 530,
+    bd = 0,
+    highlightthickness = 0,
+    relief = "ridge"
     )
 
     canvas.place(x = 0, y = 0)
@@ -47,8 +47,8 @@ def PatientDeleteScr():
         outline="")
 
     canvas.create_text(
-        26.0,
-        333.0,
+        25.0,
+        339.0,
         anchor="nw",
         text="Address ",
         fill="#000000",
@@ -64,7 +64,7 @@ def PatientDeleteScr():
         outline="")
 
     canvas.create_text(
-        26.0,
+        27.0,
         225.0,
         anchor="nw",
         text="Full Name",
@@ -72,30 +72,51 @@ def PatientDeleteScr():
         font=("Inter Bold", 12 * -1)
     )
 
-    canvas.create_rectangle(
-        26.0,
-        243.0,
-        501.0,
-        273.0,
-        fill="#FFFFFF",
-        outline="")
-
     canvas.create_text(
-        26.0,
-        116.0,
+        25.0,
+        115.0,
         anchor="nw",
-        text="Patient’s I.D",
+        text="Search",
         fill="#000000",
         font=("Inter Bold", 12 * -1)
     )
 
     canvas.create_rectangle(
         26.0,
-        134.0,
-        501.0,
-        164.0,
+        243.0,
+        273.0,
+        273.0,
         fill="#FFFFFF",
         outline="")
+
+    canvas.create_text(
+        292.0,
+        225.0,
+        anchor="nw",
+        text="Patient’s I.D",
+        fill="#000000",
+        font=("Inter Bold", 12 * -1)
+    )
+
+    entry_image_1 = PhotoImage(
+        file=relative_to_assets("entry_1.png"))
+    entry_bg_1 = canvas.create_image(
+        263.5,
+        149.0,
+        image=entry_image_1
+    )
+    entry_1 = Entry(
+        bd=0,
+        bg="#FFFFFF",
+        fg="#000716",
+        highlightthickness=0
+    )
+    entry_1.place(
+        x=32.0,
+        y=134.0,
+        width=475.0,
+        height=28.0
+    )
 
     button_image_1 = PhotoImage(
         file=relative_to_assets("button_1.png"))
@@ -178,8 +199,8 @@ def PatientDeleteScr():
     )
 
     canvas.create_text(
-        26.0,
-        279.0,
+        27.0,
+        277.0,
         anchor="nw",
         text="Date of birth",
         fill="#000000",
@@ -210,6 +231,14 @@ def PatientDeleteScr():
         fill="#FFFFFF",
         outline="")
 
+    canvas.create_rectangle(
+        291.0,
+        243.0,
+        501.0,
+        273.0,
+        fill="#FFFFFF",
+        outline="")
+
     canvas.create_text(
         26.0,
         396.0,
@@ -228,8 +257,8 @@ def PatientDeleteScr():
         outline="")
 
     canvas.create_text(
-        27.0,
-        453.0,
+        25.0,
+        452.0,
         anchor="nw",
         text="Patient In",
         fill="#000000",
@@ -261,36 +290,72 @@ def PatientDeleteScr():
         outline="")
 
     canvas.create_text(
-        27.0,
-        519.0,
+        25.0,
+        520.0,
         anchor="nw",
         text="Patient out",
         fill="#000000",
         font=("Inter Bold", 12 * -1)
     )
 
-    canvas.create_rectangle(
-        25.0,
-        539.0,
-        140.0,
-        569.0,
-        fill="#FFFFFF",
-        outline="")
+    entry_image_2 = PhotoImage(
+        file=relative_to_assets("entry_2.png"))
+    entry_bg_2 = canvas.create_image(
+        82.5,
+        554.0,
+        image=entry_image_2
+    )
+    entry_2 = Entry(
+        bd=0,
+        bg="#FFFFFF",
+        fg="#000716",
+        highlightthickness=0
+    )
+    entry_2.place(
+        x=32.0,
+        y=539.0,
+        width=115.0,
+        height=28.0
+    )
 
-    canvas.create_rectangle(
-        157.0,
-        539.0,
-        272.0,
-        569.0,
-        fill="#FFFFFF",
-        outline="")
+    entry_image_3 = PhotoImage(
+        file=relative_to_assets("entry_3.png"))
+    entry_bg_3 = canvas.create_image(
+        214.5,
+        554.0,
+        image=entry_image_3
+    )
+    entry_3 = Entry(
+        bd=0,
+        bg="#FFFFFF",
+        fg="#000716",
+        highlightthickness=0
+    )
+    entry_3.place(
+        x=162.0,
+        y=539.0,
+        width=115.0,
+        height=28.0
+    )
 
-    canvas.create_rectangle(
-        291.0,
-        539.0,
-        501.0,
-        569.0,
-        fill="#FFFFFF",
-        outline="")
+    entry_image_4 = PhotoImage(
+        file=relative_to_assets("entry_4.png"))
+    entry_bg_4 = canvas.create_image(
+        396.0,
+        554.0,
+        image=entry_image_4
+    )
+    entry_4 = Entry(
+        bd=0,
+        bg="#FFFFFF",
+        fg="#000716",
+        highlightthickness=0
+    )
+    entry_4.place(
+        x=296.0,
+        y=539.0,
+        width=210.0,
+        height=28.0
+    )
     window.resizable(False, False)
     window.mainloop()

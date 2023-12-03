@@ -7,5 +7,7 @@ class ScrPages:
         HomeScr.homescr()
     def patientaddscr(self):
         PatientFormadd.PatientFormAdd()
+    def patientupdatescr(self):
+        PatientFormUpdate.PatientFormUpdate()
     def emailscr(self):
         Emailform.EmailForm()

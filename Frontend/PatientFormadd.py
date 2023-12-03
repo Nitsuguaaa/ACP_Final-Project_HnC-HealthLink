@@ -67,7 +67,7 @@ def PatientFormAdd():
         27.0,
         273.0,
         anchor="nw",
-        text="Address Line 1",
+        text="Address Line ",
         fill="#000000",
         font=("Inter Bold", 12 * -1)
     )
@@ -103,7 +103,7 @@ def PatientFormAdd():
         27.0,
         498.0,
         anchor="nw",
-        text="(If others, please specify)",
+        text="(If other, please specify)",
         fill="#000000",
         font=("Inter Regular", 12 * -1)
     )
@@ -122,15 +122,6 @@ def PatientFormAdd():
         338.0,
         anchor="nw",
         text="Zip Code",
-        fill="#000000",
-        font=("Inter Bold", 12 * -1)
-    )
-
-    canvas.create_text(
-        273.0,
-        273.0,
-        anchor="nw",
-        text="Address Line 2",
         fill="#000000",
         font=("Inter Bold", 12 * -1)
     )
@@ -171,7 +162,7 @@ def PatientFormAdd():
     canvas.create_rectangle(
         27.0,
         293.0,
-        257.0,
+        501.0,
         323.0,
         fill="#FFFFFF",
         outline="")
@@ -197,14 +188,6 @@ def PatientFormAdd():
         357.0,
         501.0,
         387.0,
-        fill="#FFFFFF",
-        outline="")
-
-    canvas.create_rectangle(
-        273.0,
-        293.0,
-        503.0,
-        323.0,
         fill="#FFFFFF",
         outline="")
 
