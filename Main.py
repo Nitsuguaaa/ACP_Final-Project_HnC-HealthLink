@@ -1,9 +1,19 @@
 from Frontend import scrdir
-from Backend import backenddir
+from Backend import backenddir, idGenerator
+from MySQL03 import sqldir
 
 frontEnd = scrdir.ScrPages()
+sql = sqldir.SqlCommands()
 
-frontEnd.patientupdatescr()
+PatientID = idGenerator.patientIDGenerator()
+print(PatientID)
+
+#sql.insert("patienttbl", ("patientID", "patientName", "patientAddress"), (PatientID, "Mark", "Texas"))
+
+
+
+# for x in range(10):
+#    idGenerator.patientIDGenerator()
 
 
 
