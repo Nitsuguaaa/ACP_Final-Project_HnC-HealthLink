@@ -3,7 +3,7 @@ from Backend import backenddir
 
 frontEnd = scrdir.ScrPages()
 
-frontEnd.emailscr()
+frontEnd.patientupdatescr()
 
 
 

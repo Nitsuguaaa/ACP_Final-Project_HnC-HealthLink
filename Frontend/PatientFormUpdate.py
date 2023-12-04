@@ -1,3 +1,4 @@
+import tkinter
 from pathlib import Path
 from tkinter import *
 
@@ -20,6 +21,19 @@ def PatientUpdateScr():
     highlightthickness = 0,
     relief = "ridge"
     )
+
+    #Functions
+    searchName = tkinter.StringVar()
+
+    def searchPatient(event):
+        name = searchName.get()
+        entry_1.focus_set()
+        print(name)
+
+    def submit():
+        print("yohoo")
+
+    window.bind('<Return>', lambda event: searchPatient(event))
 
     canvas.place(x = 0, y = 0)
     canvas.create_rectangle(
@@ -109,7 +123,8 @@ def PatientUpdateScr():
         bd=0,
         bg="#FFFFFF",
         fg="#000716",
-        highlightthickness=0
+        highlightthickness=0,
+        textvariable=searchName
     )
     entry_1.place(
         x=32.0,
@@ -124,7 +139,7 @@ def PatientUpdateScr():
         image=button_image_1,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_1 clicked"),
+        command=submit,
         relief="flat"
     )
     button_1.place(
