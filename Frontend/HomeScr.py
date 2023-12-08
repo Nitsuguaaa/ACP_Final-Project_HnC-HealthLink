@@ -1,16 +1,26 @@
 from pathlib import Path
 from tkinter import *
+from Frontend import scrdir
+from MySQL03 import sqldir
+from Backend import backenddir
 
 ASSETS_PATH = Path(r"rsc\HomescrAssets")
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 def HomeScr():
+    sql = sqldir.SqlCommands()
+    backend = backenddir.backendCommands()
+
+    backend.dataAnalysis.topAddress()
+    backend.dataAnalysis.topDisease()
 
     window = Tk()
     window.title('H&C HealthLink')
     window.geometry("700x560")
     window.configure(bg = "#FFFFFF")
 
+    windowLogo = PhotoImage(file=r"rsc\AppLogo\app-logo.png")
+    window.iconphoto(False, windowLogo)
 
     canvas = Canvas(
         window,
@@ -88,13 +98,60 @@ def HomeScr():
         image=image_image_6
     )
 
+    def getTopAddress():
+        addressList = sql.select("topaddresstbl")
+        TopAddressText = ""
+        ctr = 1
+        for address in addressList:
+            TopAddressText += f"{ctr}. " + address[0] + "\n"
+            ctr += 1
+
+        canvas.create_text(
+            450.0,
+            335.0,
+            anchor="nw",
+            text=TopAddressText,
+            fill="#FFFFFF",
+            font=("Inter Bold", 16 * -1)
+        )
+
+    def getTopDisease():
+        diseaseList = sql.select("topdiseasetbl")
+        TopDiseaseText = ""
+        ctr = 1
+        for disease in diseaseList:
+            TopDiseaseText += f"{ctr}. " + disease[0] + "\n"
+            ctr += 1
+
+        canvas.create_text(
+            150.0,
+            335.0,
+            anchor="nw",
+            text=TopDiseaseText,
+            fill="#FFFFFF",
+            font=("Inter Bold", 16 * -1)
+        )
+
+    getTopAddress()
+    getTopDisease()
+
+    # Functions
+    scr = scrdir.ScrPages()
+    def addScr():
+        window.destroy()
+        scr.patientaddscr()
+    def emailScr():
+        window.destroy()
+        scr.emailscr()
+
+
     button_image_1 = PhotoImage(
         file=relative_to_assets("button_1.png"))
     button_1 = Button(
         image=button_image_1,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_1 clicked"),
+        command=emailScr,
         relief="flat"
     )
     button_1.place(
@@ -110,7 +167,7 @@ def HomeScr():
         image=button_image_2,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_2 clicked"),
+        command=addScr,
         relief="flat"
     )
     button_2.place(
@@ -126,7 +183,7 @@ def HomeScr():
         image=button_image_3,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_3 clicked"),
+        command=window.destroy,
         relief="flat"
     )
     button_3.place(

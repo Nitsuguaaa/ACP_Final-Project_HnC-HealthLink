@@ -1,6 +1,9 @@
 import tkinter
 from pathlib import Path
 from tkinter import *
+from Frontend import scrdir
+from MySQL03 import sqldir
+import datetime
 
 ASSETS_PATH = Path(r"rsc\FormAssets(Update)")
 def relative_to_assets(path: str) -> Path:
@@ -8,9 +11,12 @@ def relative_to_assets(path: str) -> Path:
 
 def PatientUpdateScr():
     window = Tk()
-    window.title("H&C HealthLink")
+    window.title("H&C HealthLink  |  Update Patient Information")
     window.geometry("530x700")
     window.configure(bg = "#FFFFFF")
+
+    windowLogo = PhotoImage(file=r"rsc\AppLogo\app-logo.png")
+    window.iconphoto(False, windowLogo)
 
     canvas = Canvas(
     window,
@@ -23,15 +29,70 @@ def PatientUpdateScr():
     )
 
     #Functions
+    sql = sqldir.SqlCommands()
+    scr = scrdir.ScrPages()
     searchName = tkinter.StringVar()
+    EntryPatientDay = tkinter.StringVar()
+    EntryPatientMonth = tkinter.StringVar()
+    EntryPatientYear = tkinter.StringVar()
+    def patientList(name):
+        if name[0:3] == "PT-":
+            return sql.select("patienttbl", constraints=f"WHERE patientID='{name}'", fetchOne=True)
+        else:
+            return sql.select("patienttbl", constraints=f"WHERE patientName LIKE '%{name}%'", fetchOne=True)
+
+    def patientInfo(name):
+        return sql.select("patientinfotbl", column="patientDisease, patientIn", constraints=f"WHERE patientID='{name}'", fetchOne=True)
+
+    def showPatientInfo(patientTable, patientInfoTable):
+        canvas.itemconfig(patientName, text=patientTable[1])
+        canvas.itemconfig(patientIdentification, text=patientTable[0])
+        birthdate = patientTable[2]
+        canvas.itemconfig(patientBirthDay, text=birthdate.strftime("%d"))
+        canvas.itemconfig(patientBirthMonth, text=birthdate.strftime("%b"))
+        canvas.itemconfig(patientBirthYear, text=birthdate.strftime("%Y"))
+        canvas.itemconfig(patientAddress, text=f"{patientTable[3]}, {patientTable[4]}, {patientTable[5]}, {patientTable[6]}")
+        canvas.itemconfig(patientDisease, text=patientInfoTable[0])
+        patientInDate = patientInfoTable[1]
+        canvas.itemconfig(patientInDay, text=patientInDate.strftime("%d"))
+        canvas.itemconfig(patientInMonth, text=patientInDate.strftime("%b"))
+        canvas.itemconfig(patientInYear, text=patientInDate.strftime("%Y"))
+
 
     def searchPatient(event):
         name = searchName.get()
         entry_1.focus_set()
-        print(name)
 
-    def submit():
-        print("yohoo")
+        patientTable = patientList(name)
+        patientInfoTbl = patientInfo(patientTable[0])
+
+        showPatientInfo(patientTable, patientInfoTbl)
+
+        # Might slow the program since it calls the databse mutiple times
+        # patientInfo = lambda name: sql.select("patienttbl", constraints=f"WHERE patientID='{name}'", fetchOne=True) if name[0:3] == "PT-" else sql.select("patienttbl", constraints=f"WHERE patientName LIKE '%{name}%'", fetchOne=True)
+
+    def updatePatient():
+        if canvas.itemcget(patientName, 'text') == '':
+            canvas.itemconfig(error, text="No patient searched ⚠︎")
+        else:
+            if EntryPatientDay.get() == '' or EntryPatientMonth.get() == '' or EntryPatientYear.get() == '':
+                canvas.itemconfig(error, text="fields left blank ⚠︎")
+            else:
+                print("dd/mm/yyyy:", EntryPatientDay.get(), EntryPatientMonth.get(), EntryPatientYear.get())
+                canvas.itemconfig(error, text="")
+
+                patientOut = EntryPatientYear.get() + "-" + EntryPatientMonth.get() + "-" + EntryPatientDay.get()
+                sql.update("patientinfotbl", "patientOut", patientOut, "patientID", canvas.itemcget(patientIdentification, 'text'))
+                button_1.configure(state="disabled")
+                canvas.itemconfig(success, text="Patient updated, returning to home")
+                window.after(3000, homeScr)
+
+    def addScr():
+        window.destroy()
+        scr.patientaddscr()
+    def homeScr():
+        window.destroy()
+        scr.homescr()
 
     window.bind('<Return>', lambda event: searchPatient(event))
 
@@ -76,6 +137,15 @@ def PatientUpdateScr():
         388.0,
         fill="#FFFFFF",
         outline="")
+    patientAddress = canvas.create_text(
+        27.0,
+        358.0,
+        anchor="nw",
+        text="",
+        fill="#000000",
+        font=("Inter Bold", 16 * -1)
+    )
+
 
     canvas.create_text(
         27.0,
@@ -102,6 +172,17 @@ def PatientUpdateScr():
         273.0,
         fill="#FFFFFF",
         outline="")
+
+    patientName = canvas.create_text(
+        26.0,
+        243.0,
+        anchor="nw",
+        text="",
+        fill="#000000",
+        font=("Inter Bold", 16 * -1),
+        width=280
+
+    )
 
     canvas.create_text(
         292.0,
@@ -139,7 +220,7 @@ def PatientUpdateScr():
         image=button_image_1,
         borderwidth=0,
         highlightthickness=0,
-        command=submit,
+        command=updatePatient,
         relief="flat"
     )
     button_1.place(
@@ -155,7 +236,7 @@ def PatientUpdateScr():
         image=button_image_2,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_2 clicked"),
+        command=addScr,
         relief="flat"
     )
     button_2.place(
@@ -181,7 +262,7 @@ def PatientUpdateScr():
         height=30.0
     )
 
-    button_image_4 = PhotoImage(
+    '''button_image_4 = PhotoImage(
         file=relative_to_assets("button_4.png"))
     button_4 = Button(
         image=button_image_4,
@@ -195,7 +276,7 @@ def PatientUpdateScr():
         y=21.0,
         width=95.0,
         height=35.0
-    )
+    )'''
 
     button_image_5 = PhotoImage(
         file=relative_to_assets("button_5.png"))
@@ -203,7 +284,7 @@ def PatientUpdateScr():
         image=button_image_5,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_5 clicked"),
+        command=homeScr,
         relief="flat"
     )
     button_5.place(
@@ -229,6 +310,14 @@ def PatientUpdateScr():
         327.0,
         fill="#FFFFFF",
         outline="")
+    patientBirthDay = canvas.create_text(
+        26.0,
+        297.0,
+        anchor="nw",
+        text="",
+        fill="#000000",
+        font=("Inter Bold", 16 * -1)
+    )
 
     canvas.create_rectangle(
         158.0,
@@ -237,6 +326,14 @@ def PatientUpdateScr():
         327.0,
         fill="#FFFFFF",
         outline="")
+    patientBirthMonth = canvas.create_text(
+        158.0,
+        297.0,
+        anchor="nw",
+        text="",
+        fill="#000000",
+        font=("Inter Bold", 16 * -1)
+    )
 
     canvas.create_rectangle(
         292.0,
@@ -245,6 +342,14 @@ def PatientUpdateScr():
         326.0,
         fill="#FFFFFF",
         outline="")
+    patientBirthYear = canvas.create_text(
+        292.0,
+        296.0,
+        anchor="nw",
+        text="",
+        fill="#000000",
+        font=("Inter Bold", 16 * -1)
+    )
 
     canvas.create_rectangle(
         291.0,
@@ -253,6 +358,14 @@ def PatientUpdateScr():
         273.0,
         fill="#FFFFFF",
         outline="")
+    patientIdentification = canvas.create_text(
+        291.0,
+        243.0,
+        anchor="nw",
+        text="",
+        fill="#000000",
+        font=("Inter Bold", 16 * -1)
+    )
 
     canvas.create_text(
         26.0,
@@ -270,6 +383,14 @@ def PatientUpdateScr():
         446.0,
         fill="#FFFFFF",
         outline="")
+    patientDisease = canvas.create_text(
+        26.0,
+        416.0,
+        anchor="nw",
+        text="",
+        fill="#000000",
+        font=("Inter Bold", 16 * -1)
+    )
 
     canvas.create_text(
         25.0,
@@ -287,6 +408,14 @@ def PatientUpdateScr():
         503.0,
         fill="#FFFFFF",
         outline="")
+    patientInDay = canvas.create_text(
+        25.0,
+        473.0,
+        anchor="nw",
+        text="",
+        fill="#000000",
+        font=("Inter Bold", 16 * -1)
+    )
 
     canvas.create_rectangle(
         157.0,
@@ -295,6 +424,14 @@ def PatientUpdateScr():
         503.0,
         fill="#FFFFFF",
         outline="")
+    patientInMonth = canvas.create_text(
+        157.0,
+        473.0,
+        anchor="nw",
+        text="",
+        fill="#000000",
+        font=("Inter Bold", 16 * -1)
+    )
 
     canvas.create_rectangle(
         291.0,
@@ -303,6 +440,14 @@ def PatientUpdateScr():
         503.0,
         fill="#FFFFFF",
         outline="")
+    patientInYear = canvas.create_text(
+        291.0,
+        473.0,
+        anchor="nw",
+        text="",
+        fill="#000000",
+        font=("Inter Bold", 16 * -1)
+    )
 
     canvas.create_text(
         25.0,
@@ -310,6 +455,23 @@ def PatientUpdateScr():
         anchor="nw",
         text="Patient out",
         fill="#000000",
+        font=("Inter Bold", 12 * -1)
+    )
+
+    error = canvas.create_text(
+        275.0,
+        600.0,
+        anchor="nw",
+        text="",
+        fill="RED",
+        font=("Inter Bold", 12 * -1)
+    )
+    success = canvas.create_text(
+        275.0,
+        600.0,
+        anchor="nw",
+        text="",
+        fill="GREEN",
         font=("Inter Bold", 12 * -1)
     )
 
@@ -324,7 +486,8 @@ def PatientUpdateScr():
         bd=0,
         bg="#FFFFFF",
         fg="#000716",
-        highlightthickness=0
+        highlightthickness=0,
+        textvariable=EntryPatientDay
     )
     entry_2.place(
         x=32.0,
@@ -344,7 +507,8 @@ def PatientUpdateScr():
         bd=0,
         bg="#FFFFFF",
         fg="#000716",
-        highlightthickness=0
+        highlightthickness=0,
+        textvariable=EntryPatientMonth
     )
     entry_3.place(
         x=162.0,
@@ -364,7 +528,8 @@ def PatientUpdateScr():
         bd=0,
         bg="#FFFFFF",
         fg="#000716",
-        highlightthickness=0
+        highlightthickness=0,
+        textvariable=EntryPatientYear
     )
     entry_4.place(
         x=296.0,

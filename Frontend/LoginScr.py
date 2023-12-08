@@ -43,7 +43,7 @@ def loginscr():
         if bool(backendCmd.passwordCheck(name, password)):
             print("Login Success")
             scr.destroy()
-            frontendCmd.patientaddscr()
+            frontendCmd.homescr()
             
         name_var.set("")
         passw_var.set("")
@@ -56,14 +56,14 @@ def loginscr():
     # USERNAME
     Label(loginCredF, text="Username", font="Roboto 8", bg='white').grid(row=0, column=0, sticky=W, pady=1, padx=(20,0))
     Label(loginCredF, image=roundedEntryAsset, border=0, bg='white').grid(row=1, column=0, pady=2, padx=(20, 80))
-    usernameEntry = Entry(loginCredF, textvariable=name_var, font=("Arial", 8), border=0, justify=LEFT, bg='#F5F4EC', width=20)
+    usernameEntry = Entry(loginCredF, textvariable=name_var, font=("Arial", 8), border=0, justify=LEFT, bg='#F5F4EC', width=50)
     usernameEntry.grid(row=1, column=0, pady=2, sticky=W, padx=(27, 0))
 
     # PASSWORD
     Label(loginCredF, text="Password", font="Roboto 8", bg='white').grid(row=2, column=0, sticky=W, pady=1, padx=(20,0))
     Label(loginCredF, image=roundedEntryAsset, border=0, bg='white').grid(row=3, column=0, pady=(0, 5), padx=(20,80))
-    passwordEntry = Entry(loginCredF, textvariable=passw_var, font=("Arial", 8), border=0, justify=LEFT, bg='#F5F4EC', show='*', width=20)
-    passwordEntry.grid(row=3, column=0, pady=10, sticky=W, padx=(27, 0))
+    passwordEntry = Entry(loginCredF, textvariable=passw_var, font=("Arial", 8), border=0, justify=LEFT, bg='#F5F4EC', show='*', width=50)
+    passwordEntry.grid(row=3, column=0, pady=7, sticky=W, padx=(27, 0))
 
     Button(loginCredF, image=roundedButtonAsset, border=0, bg='white', command=submit).grid(row=4, column=0, padx=(90, 0), pady=5)
 

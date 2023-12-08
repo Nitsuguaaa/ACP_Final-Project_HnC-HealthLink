@@ -1,5 +1,9 @@
+import tkinter
 from pathlib import Path
 from tkinter import *
+from Frontend import scrdir
+from os import startfile
+from Backend import backenddir
 
 ASSETS_PATH = Path(r"rsc\EmailAssets")
 
@@ -8,9 +12,12 @@ def relative_to_assets(path: str) -> Path:
 
 def EmailForm():
     window = Tk()
-    window.title("H&C HealthLink")
+    window.title("H&C HealthLik")
     window.geometry("700x545")
     window.configure(bg = "#FFFFFF")
+
+    windowLogo = PhotoImage(file=r"rsc\AppLogo\app-logo.png")
+    window.iconphoto(False, windowLogo)
 
     canvas = Canvas(
     window,
@@ -73,13 +80,21 @@ def EmailForm():
         image=image_image_1
     )
 
+    # Functions
+    scr = scrdir.ScrPages()
+    def homeScr():
+        window.destroy()
+        scr.homescr()
+    def openEmailList():
+        startfile(r'rsc\Lists\emailList\emailList.txt')
+
     button_image_1 = PhotoImage(
         file=relative_to_assets("button_1.png"))
     button_1 = Button(
         image=button_image_1,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_1 clicked"),
+        command=homeScr,
         relief="flat"
     )
     button_1.place(
@@ -89,13 +104,42 @@ def EmailForm():
         height=40.0
     )
 
+    # Functions
+    backend = backenddir.backendCommands()
+    oneEmail = tkinter.StringVar()
+
+    def sendToAll():
+        backend.sendEmail()
+        homeScr()
+
+    def sendToOne():
+        if oneEmail.get() == "":
+            print("No email listed")
+        else:
+            backend.sendEmail(oneEmail.get(), "one")
+            homeScr()
+
+    Entry(
+        bd=0,
+        bg="#FFFFFF",
+        fg="#000716",
+        highlightthickness=0,
+        textvariable=oneEmail,
+        font=("Inter Bold", 12 * -1)
+    ).place(
+        x=38.0,
+        y=167.0,
+        width=390,
+        height=30
+    )
+
     button_image_2 = PhotoImage(
         file=relative_to_assets("button_2.png"))
     button_2 = Button(
         image=button_image_2,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_2 clicked"),
+        command=sendToOne,
         relief="flat"
     )
     button_2.place(
@@ -111,7 +155,7 @@ def EmailForm():
         image=button_image_3,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_3 clicked"),
+        command=openEmailList,
         relief="flat"
     )
     button_3.place(
@@ -121,13 +165,14 @@ def EmailForm():
         height=134.84613037109375
     )
 
+
     button_image_4 = PhotoImage(
         file=relative_to_assets("button_4.png"))
     button_4 = Button(
         image=button_image_4,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_4 clicked"),
+        command=sendToAll,
         relief="flat"
     )
     button_4.place(

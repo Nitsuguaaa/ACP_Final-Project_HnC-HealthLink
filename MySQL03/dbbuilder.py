@@ -34,11 +34,11 @@ def createAllTables():
     mycursor = mydb.cursor()
 
     tables = (
-        "userlogintbl(username VARCHAR(255), password VARCHAR(30))",
-        "patienttbl(patientID VARCHAR(7) NOT NULL , patientName VARCHAR(255), patientAddress VARCHAR(255), PRIMARY KEY (patientID))",
+        "userlogintbl(username VARCHAR(255), password VARCHAR(255))",
+        "patienttbl(patientID VARCHAR(7) NOT NULL , patientName VARCHAR(255), patientBirthdate DATE, patientBarangay VARCHAR(255), patientCity VARCHAR(255), patientProvince VARCHAR(255), patientZipCode VARCHAR(255), PRIMARY KEY (patientID))",
         "patientinfotbl(patientID VARCHAR(7), patientDisease VARCHAR(255), patientIn DATE, patientOut DATE, PRIMARY KEY (patientID))",
-        "topdiseasetbl(disease VARCHAR(255))",
-        "topaddresstbl(address VARCHAR(255))"
+        "topdiseasetbl(disease VARCHAR(255), count INT)",
+        "topaddresstbl(address VARCHAR(255), count INT)"
     )
 
     for x in tables:

@@ -1,27 +1,23 @@
 from MySQL03 import sqldir
 import bcrypt
+
+sql = sqldir.SqlCommands()
+file = open(r"rsc\Lists\UserList\salt.txt", "rt")
+salt = bytes(file.read(), encoding="utf=8")
 def passwordCheck(username, password):
-    mySql = sqldir.SqlCommands()
 
-    myresult = mySql.select("userlogin", constraints=f"WHERE Username='{username}'")
-
-    mylist = []
-    for x in myresult:
-        mylist.append(x)
-
+    mylist = sql.select("userlogintbl", constraints=f"WHERE username='{username}'")
     if not mylist:
         print("No Username Found")
         exit()
     else:
-        # NEED TO HIDE THIS SOMEWHERE (THINKING OF STORING IT IN A TEXT FILE)
-        salt = b'$2b$12$EaywnB2ci06Djd7eUEUCqe'
-
         # ENCRYPTING USER'S PASSWORD INPUT
         passing = password.encode('utf-8')
         userpass = bcrypt.hashpw(passing, salt)
 
         # ENCODING ENCRYPTED PASSWORD IN DB USERNAME MATCH
         dbinput = str(mylist[0][1])
+
         dbpass = dbinput.encode('utf=8')
 
         # BUILT IN CHECKER (NOT WORKING????)
@@ -35,3 +31,8 @@ def passwordCheck(username, password):
             print('Login: ', False)
             return False
 
+def generateUser(username, password):
+    encodedpw = password.encode('utf-8')
+    hashed = bcrypt.hashpw(encodedpw, salt)
+    sql.insert("userlogintbl", ("username", "password"), (username, hashed))
+    print("Username Generated")

@@ -19,7 +19,7 @@ def insertsql(table, elements, values):
         else:
             command += "%s, "
 
-    print(command)
+    print(command, values)
 
     mycursor.execute(command, values)
 
