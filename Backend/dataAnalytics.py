@@ -11,12 +11,14 @@ class dataAnalysis:
         sql.delete("topaddresstbl")
 
         for address in addressCount.most_common(3):
-            print(address)
             sql.insert("topaddresstbl", ("address", "count"), (address[0][0], address[1]))
 
     def topDisease(self):
-        topAddress = sql.select("topaddresstbl", column="MAX(address)")
+        topAddress = sql.select(table="topaddresstbl", column="address", constraints="ORDER BY count DESC LIMIT 1")
+        print(topAddress)
+        print("top adrresses:",sql.select("topaddresstbl"))
         diseaseList = []
+        print("top address: ", topAddress)
 
         sql.delete("topdiseasetbl")
 

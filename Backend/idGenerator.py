@@ -14,7 +14,5 @@ def patientIDGenerator():
             if ID[0] == patientID:
                 print("Patient ID already exists")
                 patientIDGenerator()
-
-                break
             else:
                 return patientID
