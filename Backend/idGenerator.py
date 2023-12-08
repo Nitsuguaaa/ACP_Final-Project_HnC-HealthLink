@@ -3,7 +3,7 @@ from MySQL03 import sqldir
 
 sql = sqldir.SqlCommands()
 def patientIDGenerator():
-    patientID = "PT-5709" #+ str(random.randint(1111, 9999))
+    patientID = "PT-" + str(random.randint(1111, 9999))
 
     IDList = sql.select("patienttbl", "patientID")
 

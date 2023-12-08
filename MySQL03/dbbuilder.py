@@ -36,7 +36,7 @@ def createAllTables():
     tables = (
         "userlogintbl(username VARCHAR(255), password VARCHAR(30))",
         "patienttbl(patientID VARCHAR(7) NOT NULL , patientName VARCHAR(255), patientAddress VARCHAR(255), PRIMARY KEY (patientID))",
-        "patientinfotbl(patientID VARCHAR(7), patientDisease VARCHAR(255), patientIn DATE, patientOut DATE, FOREIGN KEY (patientID) REFERENCES patienttbl(patientID))",
+        "patientinfotbl(patientID VARCHAR(7), patientDisease VARCHAR(255), patientIn DATE, patientOut DATE, PRIMARY KEY (patientID))",
         "topdiseasetbl(disease VARCHAR(255))",
         "topaddresstbl(address VARCHAR(255))"
     )

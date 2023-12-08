@@ -1,19 +1,19 @@
 from Frontend import scrdir
-from Backend import backenddir, idGenerator
+from Backend import backenddir
 from MySQL03 import sqldir
+import random
+from Backend import idGenerator
 
 frontEnd = scrdir.ScrPages()
 sql = sqldir.SqlCommands()
 
-PatientID = idGenerator.patientIDGenerator()
-print(PatientID)
-
-#sql.insert("patienttbl", ("patientID", "patientName", "patientAddress"), (PatientID, "Mark", "Texas"))
+mylist = ("Alangilan", "Sorosoro", "Balagtas", "Tinga", "Kumintang Ibaba")
 
 
+for x in range(20):
+    sql.insert("patienttbl", ("patientID", "patientAddress"), (idGenerator.patientIDGenerator(), mylist[random.randint(0,4)]))
 
-# for x in range(10):
-#    idGenerator.patientIDGenerator()
+# frontEnd.patientupdatescr()
 
 
 
