@@ -207,7 +207,7 @@ def PatientFormAdd():
             button_1.configure(state="disabled")
             canvas.itemconfig(error, text="")
             canvas.itemconfig(success, text="Patient added, returning to home")
-            window.after(3000, homeScr)
+            window.after(2000, homeScr)
 
 
     # Name

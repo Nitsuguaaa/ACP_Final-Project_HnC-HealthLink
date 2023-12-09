@@ -109,15 +109,23 @@ def EmailForm():
     oneEmail = tkinter.StringVar()
 
     def sendToAll():
+        button_2.configure(state="disabled")
+        button_4.configure(state="disabled")
         backend.sendEmail()
-        homeScr()
+        canvas.itemconfig(error, text="")
+        canvas.itemconfig(success, text="Email sent, returning to home")
+        window.after(3000, homeScr())
 
     def sendToOne():
         if oneEmail.get() == "":
-            print("No email listed")
+            canvas.itemconfig(error, text="fields left blank ⚠︎")
         else:
+            button_2.configure(state="disabled")
+            button_4.configure(state="disabled")
             backend.sendEmail(oneEmail.get(), "one")
-            homeScr()
+            canvas.itemconfig(error, text="")
+            canvas.itemconfig(success, text="Email sent, returning to home")
+            window.after(3000, homeScr())
 
     Entry(
         bd=0,
@@ -142,11 +150,21 @@ def EmailForm():
         command=sendToOne,
         relief="flat"
     )
+
     button_2.place(
         x=544.0,
         y=136.0,
         width=127.48846435546875,
         height=85.94444274902344
+    )
+
+    error = canvas.create_text(
+        544.0,
+        225.0,
+        anchor="nw",
+        text="",
+        fill="RED",
+        font=("Inter Bold", 12 * -1)
     )
 
     button_image_3 = PhotoImage(
@@ -181,5 +199,15 @@ def EmailForm():
         width=504.0,
         height=150.0
     )
+
+    success = canvas.create_text(
+        25.0,
+        395.0,
+        anchor="nw",
+        text="",
+        fill="GREEN",
+        font=("Inter Bold", 12 * -1)
+    )
+
     window.resizable(False, False)
     window.mainloop()

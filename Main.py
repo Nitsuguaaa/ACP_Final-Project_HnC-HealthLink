@@ -5,4 +5,4 @@ frontEnd = scrdir.ScrPages()
 sql = sqldir.SqlCommands()
 
 sql.dbBuilder()
-frontEnd.loginscr()
+frontEnd.emailscr()
