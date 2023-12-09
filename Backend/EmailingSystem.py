@@ -24,7 +24,7 @@ def sendEmail(email=None, sendType="all"):
 
     print("Email System Working")
     email_sender = 'healthlinkhnc@gmail.com'
-    email_password = 'vncb rday dlwg ctjh'
+    email_password = 'REDACTED FOR SECURITY REASONS :/'
 
     email_reciever = '22-03849@g.batstate-u.edu.ph'
 
