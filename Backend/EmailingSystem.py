@@ -26,7 +26,7 @@ def sendEmail(email=None, sendType="all"):
     email_sender = 'healthlinkhnc@gmail.com'
     email_password = 'REDACTED FOR SECURITY REASONS :/'
 
-    email_reciever = '22-03849@g.batstate-u.edu.ph'
+    email_reciever = 'redacted :3'
 
     subject = "---------H&C HealthLink Quarterly Report---------"
     body = rf"""
